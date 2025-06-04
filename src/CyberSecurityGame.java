@@ -4,3 +4,5 @@ public class CyberSecurityGame {
         game.start();
     }
 }
+
+// The game is started here where we essentially run this main class
