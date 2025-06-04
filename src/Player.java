@@ -3,7 +3,7 @@ public class Player {
     private int points;
     private static final int INITIAL_HEARTS = 3;
     private static final int INITIAL_POINTS = 5000;
-
+// declare instance vars --> player points and such
     public Player() {
         this.hearts = INITIAL_HEARTS;
         this.points = INITIAL_POINTS;
@@ -16,7 +16,7 @@ public class Player {
     public int getPoints() {
         return points;
     }
-
+// a few return methods for checking if alive later
     public void loseHeart() {
         if (hearts > 0) {
             hearts--;
@@ -45,7 +45,7 @@ public class Player {
     public boolean hasSufficientPoints() {
         return points > 0; 
     }
-
+// WE USE THESE 2 TO SEE IF THE PLAYER IS STILL ALIVE.
     public void displayStatus() {
         System.out.println("\n--- Player Status ---");
         System.out.println("Hearts: " + hearts);
