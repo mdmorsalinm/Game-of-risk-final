@@ -33,3 +33,4 @@ public class Scenario {
         return steps.size();
     }
 }
+// A small class that details the senarioes and hat exactly happens here.
