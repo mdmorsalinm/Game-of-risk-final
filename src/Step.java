@@ -52,4 +52,5 @@ public class Step {
         }
         System.out.println("5. Risk it!");
     }
+    // HERE, for each question, we display the question, along with the answer choices. Also, we put a chance to risk it.
 }
