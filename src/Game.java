@@ -19,7 +19,7 @@ public class Game {
         initializeScenarios();
     }
 
-    private void initializeScenarios() {
+    private void initializeScenarios() { // does not return anything but uses the setp class to create questions. It also designates answers and pops them into an arraylist.
         List<Step> ddosSteps = Arrays.asList(
                 new Step("Your company's main e-commerce site is suddenly laggy and unreachable for many users. Initial checks show a massive spike in traffic from diverse IP addresses. What's the most likely immediate concern?",
                         Arrays.asList("Server hardware failure.", "A Distributed Denial of Service (DDoS) attack.", "Unexpected viral marketing success.", "Database connection pool exhaustion."),
@@ -48,7 +48,7 @@ public class Game {
         );
         scenarios.add(new Scenario("DDoS Attack", "Experience a Distributed Denial of Service attack.", 500, ddosSteps));
 
-     
+     // Like the DDOS questions, this is a set of another 4 questions on a different cyber incident, along with 4 answers.
         List<Step> phishingSteps = Arrays.asList(
                 new Step("You receive an email supposedly from 'IT Support' with the subject 'Urgent: Security Update Required!' It asks you to click a link to update your password. What's your first check?",
                         Arrays.asList("Immediately click the link to secure your account.", "Check the sender's email address for legitimacy.", "Forward it to all your colleagues to warn them.", "Delete it without thinking."),
@@ -134,13 +134,13 @@ public class Game {
         );
         scenarios.add(new Scenario("Unusual Log Activity", "Investigate suspicious account login patterns.", 400, logActivitySteps));
     }
-
+// NOW WE HAVE ALL 4 SECTIONS with 4 ANSWERS TO EACH Q.
     public void start() {
-        System.out.println("Welcome to the Cybersecurity Incident Response Game!");
+        System.out.println("Welcome to the Cybersecurity Incident Response Game!"); // intro
         player.displayStatus();
 
         boolean playing = true;
-        while (playing && player.isAlive() && player.hasSufficientPoints()) {
+        while (playing && player.isAlive() && player.hasSufficientPoints()) { // Checking if the player has not lost all 5000 pts or 3 lives.
             displayScenarios();
             int scenarioChoice = getUserChoice(1, scenarios.size() + 1) -1; 
 
@@ -153,7 +153,7 @@ public class Game {
             Scenario currentScenario = scenarios.get(scenarioChoice);
             playScenario(currentScenario);
 
-            if (!player.isAlive() || !player.hasSufficientPoints()) {
+            if (!player.isAlive() || !player.hasSufficientPoints()) { // IF LOST EVERYTHING, YOU LOSE!
                 gameOver();
                 playing = false;
             } else if (playing) { 
@@ -181,7 +181,7 @@ public class Game {
             System.out.println((i + 1) + ". " + s.getName() + " - " + s.getDescription() + " (Risk Amount: " + s.getRiskAmount() + ")");
         }
         System.out.println((scenarios.size() + 1) + ". Quit Game");
-    }
+    } // Describe the chosen senario and set up questions
 
     private void playScenario(Scenario scenario) {
         System.out.println("\n--- Starting Scenario: " + scenario.getName() + " ---");
@@ -199,7 +199,8 @@ public class Game {
             currentStep.displayStep();
             int choice = getUserChoice(1, 5);
 
-            if (choice == 5) { // User chose to "Risk it!"
+            if (choice == 5) { // User chose to "Risk it!" // Our risk selection work. Here the user will be asked to roll if they decide to risk. If they roll a 5, they are allowed to skip with no penalty.
+                // THEY HAVE AN 80% CHANCE TO LOSE, so its a big risk!
                 System.out.println("You chose to RISK IT!");
                 int riskRoll = random.nextInt(5) + 1;
                 System.out.println("Rolled a " + riskRoll + "...");
@@ -213,6 +214,7 @@ public class Game {
                     System.out.println("Unlucky roll (" + riskRoll + "). You lose " + penalty + " points.");
                     player.subtractPoints(penalty);
                     delay(1000); // Give time to read penalty message
+                    // THEY LOSE THE POINTS!
 
                     if (!player.hasSufficientPoints() || !player.isAlive()) {
 
@@ -244,7 +246,7 @@ public class Game {
                 delay(2000);
             }
 
-            if (!player.isAlive() || !player.hasSufficientPoints()) {
+            if (!player.isAlive() || !player.hasSufficientPoints()) { // constantly checking if alive.
                 break;
             }
 
@@ -296,7 +298,7 @@ public class Game {
         }
     }
 
-    private void gameOver() {
+    private void gameOver() { // game end screen
         System.out.println("\nxxxxxxxxxxxxxxxxxxxx");
         System.out.println("x    GAME OVER     x");
         System.out.println("xxxxxxxxxxxxxxxxxxxx");
